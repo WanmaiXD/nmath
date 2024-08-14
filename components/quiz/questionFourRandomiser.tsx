@@ -15,7 +15,7 @@ const QuestionRandomizer: React.FC = () => {
   const [questionData, setQuestionData] = useState<Question | null>(null);
 
   useEffect(() => {
-    fetch("/data/questions.json")
+    fetch("/data/choiceQuestions.json")
       .then((response) => response.json())
       .then((data) => {
         const randomQuestion = data.questions[
