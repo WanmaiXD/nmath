@@ -29,7 +29,7 @@ const QuestionRandomizer: React.FC = () => {
   const handleChoiceClick = (choiceKey: string) => {
     if (questionData) {
       const isCorrect = questionData.correctAnswer === choiceKey;
-      console.log(isCorrect ? "Correct!" : "Incorrect!");
+      console.log(isCorrect ? "correct choice" : "incorrect choice");
     }
   };
 
@@ -38,13 +38,13 @@ const QuestionRandomizer: React.FC = () => {
   }
 
   return (
-    <div className="p-4 border rounded-md shadow-md">
+    <div className="p-4 border rounded-md">
       <p className="text-lg mb-4">{questionData.question}</p>
       <ul className="space-y-2">
         {Object.entries(questionData.choices).map(([key, value]) => (
           <li
             key={key}
-            className="p-2 border rounded-md cursor-pointer bg-neutral-800 hover:bg-neutral-700 transition-colors duration-200 ease-in-out"
+            className="p-2 border rounded-md cursor-pointer bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 duration-200 ease-in-out"
             onClick={() => handleChoiceClick(key)}
           >
             {value}
