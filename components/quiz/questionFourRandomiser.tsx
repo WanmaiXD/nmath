@@ -13,29 +13,54 @@ interface Question {
 
 const QuestionRandomizer: React.FC = () => {
   const [questionData, setQuestionData] = useState<Question | null>(null);
+  const [remainingQuestions, setRemainingQuestions] = useState<Question[]>([]);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [allQuestionsReached, setAllQuestionsReached] = useState(false);
 
   useEffect(() => {
     fetch("/data/choiceQuestions.json")
       .then((response) => response.json())
       .then((data) => {
-        const randomQuestion = data.questions[
-          Math.floor(Math.random() * data.questions.length)
-        ] as Question;
-        setQuestionData(randomQuestion);
+        setRemainingQuestions(data.questions);
+        setRandomQuestion(data.questions);
       })
       .catch((error) => console.error("Error fetching questions:", error));
   }, []);
+
+  const setRandomQuestion = (questions: Question[]) => {
+    const randomIndex = Math.floor(Math.random() * questions.length);
+    setQuestionData(questions[randomIndex]);
+  };
 
   const handleChoiceClick = (choiceKey: string) => {
     if (questionData) {
       const correct = questionData.correctAnswer === choiceKey;
       setIsCorrect(correct);
+
+      if (correct) {
+        const newRemainingQuestions = remainingQuestions.filter(
+          (q) => q.id !== questionData.id
+        );
+
+        if (newRemainingQuestions.length > 0) {
+          setTimeout(() => {
+            setRemainingQuestions(newRemainingQuestions);
+            setRandomQuestion(newRemainingQuestions);
+            setIsCorrect(null);
+          }, 1000); // change the correct message delay until next question here
+        } else {
+          setAllQuestionsReached(true);
+        }
+      }
     }
   };
 
+  if (allQuestionsReached) {
+    return <div className="text-center text-2xl">every questions reached</div>;
+  }
+
   if (!questionData) {
-    return <div className="text-center">Loading questions...</div>;
+    return <div className="text-center">loading</div>;
   }
 
   return (
@@ -46,7 +71,7 @@ const QuestionRandomizer: React.FC = () => {
           isCorrect === null ? "opacity-0" : "opacity-100"
         } ${isCorrect !== null && "backdrop-blur"}`}
       >
-        {isCorrect ? "it is correct sir" : "incorrect"}
+        {isCorrect ? "correct" : "incorrect"}
       </div>
       {/* card itself */}
       <div

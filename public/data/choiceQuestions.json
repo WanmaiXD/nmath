@@ -9,7 +9,7 @@
           "choice3": "q1c3",
           "choice4": "q1c4"
         },
-        "correctAnswer": "choice3"
+        "correctAnswer": "choice1"
       },
       {
         "id": 2,
@@ -31,7 +31,7 @@
           "choice3": "q3c3",
           "choice4": "q3c4"
         },
-        "correctAnswer": "choice1"
+        "correctAnswer": "choice3"
       },
       {
         "id": 4,
