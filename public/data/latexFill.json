@@ -13,8 +13,8 @@
     },
     {
       "id": 3,
-      "question": "i have a gun, they have a taser, who am i?",
-      "correctAnswer": ["school shooter"]
+      "question": "im 20 and my girlfriend is 13, what is the age difference",
+      "correctAnswer": ["4"]
     }
   ]
 }
