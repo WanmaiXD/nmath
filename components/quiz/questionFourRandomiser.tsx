@@ -48,37 +48,28 @@ const ChoiceQuestionCard: React.FC<{
 
   return (
     <div className="relative p-4 border rounded-md mx-auto mb-4">
-      <div>
-        <p className="text-lg mb-4">{question.question}</p>
-        <ul className="space-y-2">
-          {Object.entries(question.choices).map(([key, value]) => (
-            <li
-              key={key}
-              className={`p-2 border rounded-md cursor-pointer duration-200 ease-in-out ${
-                isAnswered
-                  ? key === (question as AnsweredChoiceQuestion).selectedAnswer
-                    ? isCorrect
-                      ? "bg-green-500 dark:bg-opacity-30 bg-opacity-15 border-green-500 dark:text-white text-black"
-                      : "bg-red-500 bg-opacity-30 border-red-500 dark:text-white text-black"
-                    : key === question.correctAnswer
-                      ? "bg-green-500 dark:bg-opacity-30 bg-opacity-15 border-green-500 dark:text-white text-black"
-                      : "bg-neutral-100 dark:bg-neutral-800"
+      <p className="text-lg mb-4">{question.question}</p>
+      <ul className="space-y-2">
+        {Object.entries(question.choices).map(([key, value]) => (
+          <li
+            key={key}
+            className={`p-2 border rounded-md cursor-pointer duration-200 ease-in-out ${
+              isAnswered
+                ? key === (question as AnsweredChoiceQuestion).selectedAnswer
+                  ? isCorrect
+                    ? "bg-green-500 dark:bg-opacity-30 bg-opacity-15 border-green-500 dark:text-white text-black"
+                    : "bg-red-500 bg-opacity-30 border-red-500 dark:text-white text-black"
+                  : key === question.correctAnswer
+                  ? "bg-green-500 dark:bg-opacity-30 bg-opacity-15 border-green-500 dark:text-white text-black"
                   : "bg-neutral-100 dark:bg-neutral-800"
-              }`}
-              onClick={() => !isAnswered && onAnswer && onAnswer(key)}
-            >
-              {value}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        {isAnswered && (
-          <div className="mt-2 text-lg">
-            {isCorrect ? "correct" : "incorrect"}
-          </div>
-        )}
-      </div>
+                : "bg-neutral-100 dark:bg-neutral-800"
+            }`}
+            onClick={() => !isAnswered && onAnswer && onAnswer(key)}
+          >
+            {value}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
@@ -97,7 +88,7 @@ const LatexQuestionCard: React.FC<{
   const isCorrect =
     isAnswered &&
     (question as AnsweredLatexQuestion).correctAnswer.includes(
-      (question as AnsweredLatexQuestion).selectedAnswer,
+      (question as AnsweredLatexQuestion).selectedAnswer
     );
 
   return (
@@ -130,13 +121,6 @@ const LatexQuestionCard: React.FC<{
         >
           Submit
         </Button>
-      )}
-      {isAnswered && (
-        <div className="mt-2 text-lg">
-          {isCorrect
-            ? "correct"
-            : `correct answer: ${question.correctAnswer.join(", ")}`}
-        </div>
       )}
     </div>
   );
@@ -210,7 +194,7 @@ const QuestionRandomizer: React.FC = () => {
       }
 
       const newRemainingQuestions = remainingQuestions.filter(
-        (q) => q.id !== currentQuestion.id,
+        (q) => q.id !== currentQuestion.id
       );
 
       if (newRemainingQuestions.length > 0) {
@@ -231,11 +215,9 @@ const QuestionRandomizer: React.FC = () => {
             <ChoiceQuestionCard key={q.id} question={q} isAnswered={true} />
           ) : (
             <LatexQuestionCard key={q.id} question={q} isAnswered={true} />
-          ),
+          )
         )}
-        <div className="text-center text-2xl">
-          every questions has been answered
-        </div>
+        <div className="text-center text-2xl">every questions has been answered</div>
       </div>
     );
   }
@@ -251,7 +233,7 @@ const QuestionRandomizer: React.FC = () => {
           <ChoiceQuestionCard key={q.id} question={q} isAnswered={true} />
         ) : (
           <LatexQuestionCard key={q.id} question={q} isAnswered={true} />
-        ),
+        )
       )}
       {currentQuestion && (
         <motion.div
@@ -276,9 +258,7 @@ const QuestionRandomizer: React.FC = () => {
         </motion.div>
       )}
       {allQuestionsReached && (
-        <div className="text-center text-2xl mb-2">
-          every questions has been answered
-        </div>
+        <div className="text-center text-2xl mb-2">every questions has been answered</div>
       )}
     </div>
   );
