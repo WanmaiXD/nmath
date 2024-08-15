@@ -35,10 +35,10 @@ const QuestionCard: React.FC<{
               isAnswered
                 ? key === (question as AnsweredQuestion).selectedAnswer
                   ? isCorrect
-                    ? "bg-green-500 text-white"
-                    : "bg-red-500 text-white"
+                    ? "bg-green-500 dark:bg-opacity-30 bg-opacity-15 border-green-500 dark:text-white text-black"
+                    : "bg-red-500 bg-opacity-30 border-red-500 dark:text-white text-black"
                   : key === question.correctAnswer
-                  ? "bg-green-500 text-white"
+                  ? "bg-green-500 dark:bg-opacity-30 bg-opacity-15 border-green-500 dark:text-white text-black"
                   : "bg-neutral-100 dark:bg-neutral-800"
                 : "bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
             }`}
