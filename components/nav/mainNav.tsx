@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { ModeToggle } from "../theming/themeToggle";
+import Link from "next/link";
 
 const MainNav = () => {
   return (
@@ -9,30 +10,19 @@ const MainNav = () => {
         <div className="text-black dark:text-white text-2xl">nmath.com</div>
 
         <div className={`flex items-center space-x-4`}>
-          <a
-            href="#"
-            className="text-black dark:text-white hover:text-gray-200"
+          <Link
+            href="/about"
+            className="transition-colors duration-200 ease-in-out hover:text-orange-600"
           >
-            [a]
-          </a>
-          <a
-            href="#"
-            className="text-black dark:text-white hover:text-gray-200"
+            [about]
+          </Link>
+          
+          <Link
+            href="/disclaimer"
+            className="transition-colors duration-200 ease-in-out hover:text-orange-600"
           >
-            [b]
-          </a>
-          <a
-            href="#"
-            className="text-black dark:text-white hover:text-gray-200"
-          >
-            [c]
-          </a>
-          <a
-            href="#"
-            className="text-black dark:text-white hover:text-gray-200"
-          >
-            [d]
-          </a>
+            [disclaimer]
+          </Link>
 
           <div>
             <ModeToggle />
