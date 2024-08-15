@@ -67,7 +67,7 @@ const QuestionRandomizer: React.FC = () => {
     <div className="relative p-4 border rounded-md mx-auto">
       {/* overlay */}
       <div
-        className={`pointer-events-none absolute inset-0 z-20 flex items-center justify-center dark:text-white text-black text-4xl transition-opacity duration-300 ${
+        className={`pointer-events-none absolute inset-0 z-20 flex items-center justify-center dark:text-white text-black text-4xl ${
           isCorrect === null ? "opacity-0 transition-none duration-0" : "opacity-100 transition-opacity duration-300"
         } ${isCorrect !== null && "backdrop-blur"}`}
       >
