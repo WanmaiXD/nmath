@@ -114,13 +114,13 @@ const QuestionRandomizer: React.FC = () => {
         {answeredQuestions.map((q) => (
           <QuestionCard key={q.id} question={q} isAnswered={true} />
         ))}
-        <div className="text-center text-2xl mb-4">All questions answered!</div>
+        <div className="text-center text-2xl mb-4">All questions answered</div>
       </div>
     );
   }
 
   if (!currentQuestion) {
-    return <div className="text-center text-2xl">Loading questions...</div>;
+    return <div className="text-center text-2xl">loading</div>;
   }
 
   return (
