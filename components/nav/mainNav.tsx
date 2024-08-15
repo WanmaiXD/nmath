@@ -7,7 +7,7 @@ const MainNav = () => {
   return (
     <nav className="rounded-md">
       <div className="mx-auto flex justify-between items-center">
-        <div className="text-black dark:text-white text-2xl">nmath.com</div>
+        <Link href={'/'} className="text-black dark:text-white text-2xl">nmath.com</Link>
 
         <div className={`flex items-center space-x-4`}>
           <Link
