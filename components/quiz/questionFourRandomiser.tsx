@@ -217,7 +217,7 @@ const QuestionRandomizer: React.FC = () => {
             <LatexQuestionCard key={q.id} question={q} isAnswered={true} />
           )
         )}
-        <div className="text-center text-2xl mb-4">All questions answered</div>
+        <div className="text-center text-2xl">every questions has been answered</div>
       </div>
     );
   }
@@ -258,7 +258,7 @@ const QuestionRandomizer: React.FC = () => {
         </motion.div>
       )}
       {allQuestionsReached && (
-        <div className="text-center text-2xl mb-4">All questions answered</div>
+        <div className="text-center text-2xl mb-2">every questions has been answered</div>
       )}
     </div>
   );
