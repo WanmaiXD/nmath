@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 interface Question {
   id: number;
@@ -60,6 +60,8 @@ const QuestionRandomizer: React.FC = () => {
   const [remainingQuestions, setRemainingQuestions] = useState<Question[]>([]);
   const [allQuestionsReached, setAllQuestionsReached] = useState(false);
 
+  const questionsContainerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     fetch("/data/choiceQuestions.json")
       .then((response) => response.json())
@@ -69,6 +71,15 @@ const QuestionRandomizer: React.FC = () => {
       })
       .catch((error) => console.error("error fetching questions:", error));
   }, []);
+
+  useEffect(() => {
+    if (questionsContainerRef.current) {
+      questionsContainerRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end", // aligns the bottom of the element to the bottom of the scrollable ancestor
+      });
+    }
+  }, [answeredQuestions]);
 
   const setRandomQuestion = (questions: Question[]) => {
     const randomIndex = Math.floor(Math.random() * questions.length);
@@ -113,7 +124,7 @@ const QuestionRandomizer: React.FC = () => {
   }
 
   return (
-    <div>
+    <div ref={questionsContainerRef}>
       {answeredQuestions.map((q) => (
         <QuestionCard key={q.id} question={q} isAnswered={true} />
       ))}
