@@ -2,12 +2,12 @@
     "questions": [
       {
         "id": 1,
-        "question": "q1",
+        "question": "Tyrone stole 46 pieces of chicken from KFC, how much in watermelon does Tyrone have to pay back if 1 watermelon is 2 pieces of chicken?",
         "choices": {
-          "choice1": "q1c1",
-          "choice2": "q1c2",
-          "choice3": "q1c3",
-          "choice4": "q1c4"
+          "choice1": "23 Watermelons",
+          "choice2": "31 Watermelons",
+          "choice3": "24 Watermatons",
+          "choice4": "19 Watermelons"
         },
         "correctAnswer": "choice1"
       },
