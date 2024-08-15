@@ -227,7 +227,7 @@ const QuestionRandomizer: React.FC = () => {
   }
 
   return (
-    <div ref={questionsContainerRef}>
+    <div ref={questionsContainerRef} className="pb-3">
       {answeredQuestions.map((q) =>
         isChoiceQuestion(q) ? (
           <ChoiceQuestionCard key={q.id} question={q} isAnswered={true} />
