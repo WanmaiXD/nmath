@@ -110,7 +110,7 @@ const QuestionRandomizer: React.FC = () => {
 
   if (allQuestionsReached) {
     return (
-      <div>
+      <div ref={questionsContainerRef} className="pb-5">
         {answeredQuestions.map((q) => (
           <QuestionCard key={q.id} question={q} isAnswered={true} />
         ))}
