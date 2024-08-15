@@ -1,49 +1,49 @@
 {
-    "questions": [
-      {
-        "id": 1,
-        "question": "Tyrone stole 46 pieces of chicken from KFC, how much in watermelon does Tyrone have to pay back if 1 watermelon is 2 pieces of chicken?",
-        "choices": {
-          "choice1": "23 Watermelons",
-          "choice2": "31 Watermelons",
-          "choice3": "24 Watermatons",
-          "choice4": "19 Watermelons"
-        },
-        "correctAnswer": "choice1"
+  "type": "choice",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Tyrone stole 46 pieces of chicken from KFC, how much in watermelon does Tyrone have to pay back if 1 watermelon is 2 pieces of chicken?",
+      "choices": {
+        "choice1": "23 Watermelons",
+        "choice2": "31 Watermelons",
+        "choice3": "24 Watermetons",
+        "choice4": "19 Watermelons"
       },
-      {
-        "id": 2,
-        "question": "q2",
-        "choices": {
-          "choice1": "q2c1",
-          "choice2": "q2c2",
-          "choice3": "q2c3",
-          "choice4": "q2c4"
-        },
-        "correctAnswer": "choice2"
+      "correctAnswer": "choice1"
+    },
+    {
+      "id": 2,
+      "question": "q2",
+      "choices": {
+        "choice1": "q2c1",
+        "choice2": "q2c2",
+        "choice3": "q2c3",
+        "choice4": "q2c4"
       },
-      {
-        "id": 3,
-        "question": "q3",
-        "choices": {
-          "choice1": "q3c1",
-          "choice2": "q3c2",
-          "choice3": "q3c3",
-          "choice4": "q3c4"
-        },
-        "correctAnswer": "choice3"
+      "correctAnswer": "choice2"
+    },
+    {
+      "id": 3,
+      "question": "q3",
+      "choices": {
+        "choice1": "q3c1",
+        "choice2": "q3c2",
+        "choice3": "q3c3",
+        "choice4": "q3c4"
       },
-      {
-        "id": 4,
-        "question": "q4",
-        "choices": {
-          "choice1": "q4c1",
-          "choice2": "q4c2",
-          "choice3": "q4c3",
-          "choice4": "q4c4"
-        },
-        "correctAnswer": "choice4"
-      }
-    ]
-  }
-  
+      "correctAnswer": "choice3"
+    },
+    {
+      "id": 4,
+      "question": "q4",
+      "choices": {
+        "choice1": "q4c1",
+        "choice2": "q4c2",
+        "choice3": "q4c3",
+        "choice4": "q4c4"
+      },
+      "correctAnswer": "choice4"
+    }
+  ]
+}

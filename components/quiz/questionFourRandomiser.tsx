@@ -1,9 +1,12 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-interface Question {
-  id: number;
+interface ChoiceQuestion {
+  type: "choice";
+  id: number; // This will be assigned dynamically
   question: string;
   choices: {
     [key: string]: string;
@@ -11,18 +14,36 @@ interface Question {
   correctAnswer: string;
 }
 
-interface AnsweredQuestion extends Question {
+interface LatexQuestion {
+  type: "latex";
+  id: number; // This will be assigned dynamically
+  question: string;
+  correctAnswer: string[];
+}
+
+type Question = ChoiceQuestion | LatexQuestion;
+
+interface AnsweredChoiceQuestion extends ChoiceQuestion {
   selectedAnswer: string;
 }
 
-const QuestionCard: React.FC<{
-  question: Question | AnsweredQuestion;
+interface AnsweredLatexQuestion extends LatexQuestion {
+  selectedAnswer: string;
+}
+
+const isChoiceQuestion = (question: Question): question is ChoiceQuestion => {
+  return question.type === "choice";
+};
+
+const ChoiceQuestionCard: React.FC<{
+  question: ChoiceQuestion | AnsweredChoiceQuestion;
   onAnswer?: (choiceKey: string) => void;
   isAnswered: boolean;
 }> = ({ question, onAnswer, isAnswered }) => {
   const isCorrect =
     isAnswered &&
-    (question as AnsweredQuestion).selectedAnswer === question.correctAnswer;
+    (question as AnsweredChoiceQuestion).selectedAnswer ===
+      question.correctAnswer;
 
   return (
     <div className="relative p-4 border rounded-md mx-auto mb-4">
@@ -33,7 +54,7 @@ const QuestionCard: React.FC<{
             key={key}
             className={`p-2 border rounded-md cursor-pointer duration-200 ease-in-out ${
               isAnswered
-                ? key === (question as AnsweredQuestion).selectedAnswer
+                ? key === (question as AnsweredChoiceQuestion).selectedAnswer
                   ? isCorrect
                     ? "bg-green-500 dark:bg-opacity-30 bg-opacity-15 border-green-500 dark:text-white text-black"
                     : "bg-red-500 bg-opacity-30 border-red-500 dark:text-white text-black"
@@ -52,10 +73,58 @@ const QuestionCard: React.FC<{
   );
 };
 
+const LatexQuestionCard: React.FC<{
+  question: LatexQuestion | AnsweredLatexQuestion;
+  onAnswer?: (inputValue: string) => void;
+  isAnswered: boolean;
+}> = ({ question, onAnswer, isAnswered }) => {
+  const [inputValue, setInputValue] = useState("");
+
+  const isCorrect =
+    isAnswered &&
+    (question as AnsweredLatexQuestion).correctAnswer.includes(
+      (question as AnsweredLatexQuestion).selectedAnswer
+    );
+
+  return (
+    <div className="relative p-4 border rounded-md mx-auto mb-4">
+      <div className="pb-3">
+        <p>{question.question}</p>
+      </div>
+      <Input
+        type="text"
+        placeholder="answer here, click submit when done"
+        value={
+          isAnswered
+            ? (question as AnsweredLatexQuestion).selectedAnswer
+            : inputValue
+        }
+        onChange={(e) => setInputValue(e.target.value.toLowerCase())}
+        className={`mb-2 ${
+          isAnswered
+            ? isCorrect
+              ? "border-green-500 bg-green-500 dark:bg-opacity-30 bg-opacity-15"
+              : "border-red-500 bg-red-500 dark:bg-opacity-30 bg-opacity-15"
+            : ""
+        }`}
+        readOnly={isAnswered}
+      />
+      {!isAnswered && (
+        <Button
+          className="transition-all duration-200 ease-in-out"
+          onClick={() => onAnswer && onAnswer(inputValue)}
+        >
+          Submit
+        </Button>
+      )}
+    </div>
+  );
+};
+
 const QuestionRandomizer: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
   const [answeredQuestions, setAnsweredQuestions] = useState<
-    AnsweredQuestion[]
+    (AnsweredChoiceQuestion | AnsweredLatexQuestion)[]
   >([]);
   const [remainingQuestions, setRemainingQuestions] = useState<Question[]>([]);
   const [allQuestionsReached, setAllQuestionsReached] = useState(false);
@@ -63,20 +132,39 @@ const QuestionRandomizer: React.FC = () => {
   const questionsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch("/data/choiceQuestions.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setRemainingQuestions(data.questions);
-        setRandomQuestion(data.questions);
+    Promise.all([
+      fetch("/data/choiceQuestions.json").then((response) => response.json()),
+      fetch("/data/latexFill.json").then((response) => response.json()),
+    ])
+      .then(([choiceData, latexData]) => {
+        // Combine questions and assign unique IDs based on the total number of questions
+        const allQuestions = [
+          ...choiceData.questions.map((q: ChoiceQuestion, index: number) => ({
+            ...q,
+            id: index + 1,
+            type: "choice",
+          })),
+          ...latexData.questions.map((q: LatexQuestion, index: number) => ({
+            ...q,
+            id: choiceData.questions.length + index + 1,
+            type: "latex",
+          })),
+        ];
+
+        // Shuffle questions
+        const shuffledQuestions = allQuestions.sort(() => Math.random() - 0.5);
+
+        setRemainingQuestions(shuffledQuestions);
+        setRandomQuestion(shuffledQuestions);
       })
-      .catch((error) => console.error("error fetching questions:", error));
+      .catch((error) => console.error("Error fetching questions:", error));
   }, []);
 
   useEffect(() => {
     if (questionsContainerRef.current) {
       questionsContainerRef.current.scrollIntoView({
         behavior: "smooth",
-        block: "end", // aligns the bottom of the element to the bottom of the scrollable ancestor
+        block: "end",
       });
     }
   }, [answeredQuestions]);
@@ -86,13 +174,21 @@ const QuestionRandomizer: React.FC = () => {
     setCurrentQuestion(questions[randomIndex]);
   };
 
-  const handleAnswer = (choiceKey: string) => {
+  const handleAnswer = (answer: string) => {
     if (currentQuestion) {
-      const answeredQuestion: AnsweredQuestion = {
-        ...currentQuestion,
-        selectedAnswer: choiceKey,
-      };
-      setAnsweredQuestions([...answeredQuestions, answeredQuestion]);
+      if (isChoiceQuestion(currentQuestion)) {
+        const answeredQuestion: AnsweredChoiceQuestion = {
+          ...currentQuestion,
+          selectedAnswer: answer,
+        };
+        setAnsweredQuestions([...answeredQuestions, answeredQuestion]);
+      } else {
+        const answeredQuestion: AnsweredLatexQuestion = {
+          ...currentQuestion,
+          selectedAnswer: answer,
+        };
+        setAnsweredQuestions([...answeredQuestions, answeredQuestion]);
+      }
 
       const newRemainingQuestions = remainingQuestions.filter(
         (q) => q.id !== currentQuestion.id
@@ -111,9 +207,13 @@ const QuestionRandomizer: React.FC = () => {
   if (allQuestionsReached) {
     return (
       <div ref={questionsContainerRef} className="pb-5">
-        {answeredQuestions.map((q) => (
-          <QuestionCard key={q.id} question={q} isAnswered={true} />
-        ))}
+        {answeredQuestions.map((q) =>
+          isChoiceQuestion(q) ? (
+            <ChoiceQuestionCard key={q.id} question={q} isAnswered={true} />
+          ) : (
+            <LatexQuestionCard key={q.id} question={q} isAnswered={true} />
+          )
+        )}
         <div className="text-center text-2xl mb-4">All questions answered</div>
       </div>
     );
@@ -125,14 +225,26 @@ const QuestionRandomizer: React.FC = () => {
 
   return (
     <div ref={questionsContainerRef}>
-      {answeredQuestions.map((q) => (
-        <QuestionCard key={q.id} question={q} isAnswered={true} />
-      ))}
-      <QuestionCard
-        question={currentQuestion}
-        onAnswer={handleAnswer}
-        isAnswered={false}
-      />
+      {answeredQuestions.map((q) =>
+        isChoiceQuestion(q) ? (
+          <ChoiceQuestionCard key={q.id} question={q} isAnswered={true} />
+        ) : (
+          <LatexQuestionCard key={q.id} question={q} isAnswered={true} />
+        )
+      )}
+      {isChoiceQuestion(currentQuestion) ? (
+        <ChoiceQuestionCard
+          question={currentQuestion}
+          onAnswer={handleAnswer}
+          isAnswered={false}
+        />
+      ) : (
+        <LatexQuestionCard
+          question={currentQuestion}
+          onAnswer={handleAnswer}
+          isAnswered={false}
+        />
+      )}
     </div>
   );
 };

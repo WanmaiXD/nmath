@@ -1,0 +1,20 @@
+{
+  "type": "latex",
+  "questions": [
+    {
+      "id": 1,
+      "question": "what is the square root of 81",
+      "correctAnswer": ["+-9", "-+9", "9, -9", "-9, 9", "9,-9", "-9,9"]
+    },
+    {
+      "id": 2,
+      "question": "[test] answer is 2",
+      "correctAnswer": ["3"]
+    },
+    {
+      "id": 3,
+      "question": "i have a gun, they have a taser, who am i?",
+      "correctAnswer": ["school shooter"]
+    }
+  ]
+}
