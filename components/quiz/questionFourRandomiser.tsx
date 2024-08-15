@@ -62,7 +62,7 @@ const QuestionRandomizer: React.FC = () => {
   }
 
   if (!questionData) {
-    return <div className="text-center">Loading</div>;
+    return <div className="text-center text-2xl">Loading quesitons</div>;
   }
 
   return (
