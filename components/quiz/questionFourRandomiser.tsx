@@ -131,6 +131,13 @@ const LatexQuestionCard: React.FC<{
           Submit
         </Button>
       )}
+      {isAnswered && (
+        <div className="mt-2 text-lg">
+          {isCorrect
+            ? "correct"
+            : `correct answer: ${question.correctAnswer.join(", ")}`}
+        </div>
+      )}
     </div>
   );
 };
