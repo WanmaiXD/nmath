@@ -8,6 +8,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import Footer from "@/components/footer/gitFooter";
 
 export default function Page() {
   const currentDate = new Date("2024-07-14");
@@ -45,6 +46,8 @@ export default function Page() {
             days. we currently have no intention of renewing it.
           </p>
         </div>
+
+        <Footer />
       </div>
     </main>
   );
