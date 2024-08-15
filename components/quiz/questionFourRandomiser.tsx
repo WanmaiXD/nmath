@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 interface ChoiceQuestion {
   type: "choice";
@@ -81,7 +82,7 @@ const LatexQuestionCard: React.FC<{
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    setInputValue(""); // reset input value when a new question is passed
+    setInputValue("");
   }, [question]);
 
   const isCorrect =
@@ -234,18 +235,30 @@ const QuestionRandomizer: React.FC = () => {
           <LatexQuestionCard key={q.id} question={q} isAnswered={true} />
         )
       )}
-      {isChoiceQuestion(currentQuestion) ? (
-        <ChoiceQuestionCard
-          question={currentQuestion}
-          onAnswer={handleAnswer}
-          isAnswered={false}
-        />
-      ) : (
-        <LatexQuestionCard
-          question={currentQuestion}
-          onAnswer={handleAnswer}
-          isAnswered={false}
-        />
+      {currentQuestion && (
+        <motion.div
+          key={currentQuestion.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {isChoiceQuestion(currentQuestion) ? (
+            <ChoiceQuestionCard
+              question={currentQuestion}
+              onAnswer={handleAnswer}
+              isAnswered={false}
+            />
+          ) : (
+            <LatexQuestionCard
+              question={currentQuestion}
+              onAnswer={handleAnswer}
+              isAnswered={false}
+            />
+          )}
+        </motion.div>
+      )}
+      {allQuestionsReached && (
+        <div className="text-center text-2xl mb-4">All questions answered</div>
       )}
     </div>
   );
