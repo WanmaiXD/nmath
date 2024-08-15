@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 interface ChoiceQuestion {
   type: "choice";
-  id: number; // This will be assigned dynamically
+  id: number;
   question: string;
   choices: {
     [key: string]: string;
@@ -16,7 +16,7 @@ interface ChoiceQuestion {
 
 interface LatexQuestion {
   type: "latex";
-  id: number; // This will be assigned dynamically
+  id: number;
   question: string;
   correctAnswer: string[];
 }
@@ -80,6 +80,10 @@ const LatexQuestionCard: React.FC<{
 }> = ({ question, onAnswer, isAnswered }) => {
   const [inputValue, setInputValue] = useState("");
 
+  useEffect(() => {
+    setInputValue(""); // reset input value when a new question is passed
+  }, [question]);
+
   const isCorrect =
     isAnswered &&
     (question as AnsweredLatexQuestion).correctAnswer.includes(
@@ -137,7 +141,6 @@ const QuestionRandomizer: React.FC = () => {
       fetch("/data/latexFill.json").then((response) => response.json()),
     ])
       .then(([choiceData, latexData]) => {
-        // Combine questions and assign unique IDs based on the total number of questions
         const allQuestions = [
           ...choiceData.questions.map((q: ChoiceQuestion, index: number) => ({
             ...q,
@@ -151,7 +154,6 @@ const QuestionRandomizer: React.FC = () => {
           })),
         ];
 
-        // Shuffle questions
         const shuffledQuestions = allQuestions.sort(() => Math.random() - 0.5);
 
         setRemainingQuestions(shuffledQuestions);
