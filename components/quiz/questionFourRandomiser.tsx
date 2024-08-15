@@ -14,6 +14,7 @@ interface Question {
 const QuestionRandomizer: React.FC = () => {
   const [questionData, setQuestionData] = useState<Question | null>(null);
   const [remainingQuestions, setRemainingQuestions] = useState<Question[]>([]);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [allQuestionsReached, setAllQuestionsReached] = useState(false);
 
@@ -33,58 +34,59 @@ const QuestionRandomizer: React.FC = () => {
   };
 
   const handleChoiceClick = (choiceKey: string) => {
-    if (questionData) {
+    if (questionData && selectedAnswer === null) {
+      setSelectedAnswer(choiceKey);
       const correct = questionData.correctAnswer === choiceKey;
       setIsCorrect(correct);
 
-      if (correct) {
+      setTimeout(() => {
         const newRemainingQuestions = remainingQuestions.filter(
           (q) => q.id !== questionData.id
         );
 
         if (newRemainingQuestions.length > 0) {
-          setTimeout(() => {
-            setRemainingQuestions(newRemainingQuestions);
-            setRandomQuestion(newRemainingQuestions);
-            setIsCorrect(null);
-          }, 1000); // change the correct message delay until next question here
+          setRemainingQuestions(newRemainingQuestions);
+          setRandomQuestion(newRemainingQuestions);
         } else {
           setAllQuestionsReached(true);
         }
-      }
+
+        setIsCorrect(null);
+        setSelectedAnswer(null);
+      }, 1000); // delay before showing the next question
     }
   };
 
   if (allQuestionsReached) {
-    return <div className="text-center text-2xl">every questions reached</div>;
+    return <div className="text-center text-2xl">Every question reached</div>;
   }
 
   if (!questionData) {
-    return <div className="text-center">loading</div>;
+    return <div className="text-center">Loading</div>;
   }
 
   return (
     <div className="relative p-4 border rounded-md mx-auto">
-      {/* overlay */}
-      <div
-        className={`pointer-events-none absolute inset-0 z-20 flex items-center justify-center dark:text-white text-black text-4xl ${
-          isCorrect === null ? "opacity-0 transition-none duration-0" : "opacity-100 transition-opacity duration-300"
-        } ${isCorrect !== null && "backdrop-blur"}`}
-      >
-        {isCorrect ? "correct" : "incorrect"}
-      </div>
       {/* card itself */}
       <div
-        className={`relative z-10 ${
-          isCorrect !== null && "blur-sm pointer-events-none"
-        }`}
+        className={`relative z-10`}
       >
         <p className="text-lg mb-4">{questionData.question}</p>
         <ul className="space-y-2">
           {Object.entries(questionData.choices).map(([key, value]) => (
             <li
               key={key}
-              className="p-2 border rounded-md cursor-pointer bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 duration-200 ease-in-out"
+              className={`p-2 border rounded-md cursor-pointer duration-200 ease-in-out ${
+                selectedAnswer === key
+                  ? isCorrect
+                    ? "bg-green-500 text-white"
+                    : "bg-red-500 text-white"
+                  : selectedAnswer === null
+                  ? "bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                  : key === questionData.correctAnswer
+                  ? "bg-green-500 text-white"
+                  : "bg-neutral-100 dark:bg-neutral-800"
+              }`}
               onClick={() => handleChoiceClick(key)}
             >
               {value}
