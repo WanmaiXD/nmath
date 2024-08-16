@@ -1,6 +1,8 @@
+"use client";
+
 import React, { useEffect, useRef } from "react";
 import { CircleX, CircleCheck } from "lucide-react";
-import { useScore } from "./scoreContext";
+import { useScore } from "../quiz/scoreContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function CounterCard() {
