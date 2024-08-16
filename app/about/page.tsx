@@ -11,8 +11,8 @@ import {
 import Footer from "@/components/footer/gitFooter";
 
 export default function Page() {
-  const currentDate = new Date("2024-07-14");
-  const targetDate = new Date("2025-07-14");
+  const currentDate = new Date();
+  const targetDate = new Date("2025-08-14");
 
   const timeDifference = targetDate.getTime() - currentDate.getTime();
   const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
