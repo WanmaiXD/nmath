@@ -5,12 +5,23 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useScore } from "@/components/quiz/scoreContext";
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 interface ChoiceQuestion {
   type: "choice";
   id: number;
   question: string;
-  choices: { [key: string]: string };
+  choices: {
+    [key: string]: string;
+  };
   correctAnswer: string;
 }
 
@@ -31,8 +42,9 @@ interface AnsweredLatexQuestion extends LatexQuestion {
   selectedAnswer: string;
 }
 
-const isChoiceQuestion = (question: Question): question is ChoiceQuestion =>
-  question.type === "choice";
+const isChoiceQuestion = (question: Question): question is ChoiceQuestion => {
+  return question.type === "choice";
+};
 
 const ChoiceQuestionCard: React.FC<{
   question: ChoiceQuestion | AnsweredChoiceQuestion;
@@ -77,50 +89,76 @@ const LatexQuestionCard: React.FC<{
   onAnswer?: (inputValue: string) => void;
   isAnswered: boolean;
 }> = ({ question, onAnswer, isAnswered }) => {
-  const [inputValue, setInputValue] = useState("");
+  const { control, handleSubmit, setValue } = useForm({
+    defaultValues: {
+      answer: "",
+    },
+  });
 
   useEffect(() => {
-    setInputValue("");
-  }, [question]);
+    setValue("answer", "");
+  }, [question, setValue]);
+
+  const onSubmit = (data: { answer: string }) => {
+    if (onAnswer) {
+      onAnswer(data.answer.toLowerCase());
+    }
+  };
 
   const isCorrect =
     isAnswered &&
     (question as AnsweredLatexQuestion).correctAnswer.includes(
-      (question as AnsweredLatexQuestion).selectedAnswer,
+      (question as AnsweredLatexQuestion).selectedAnswer
     );
 
   return (
-    <div className="relative p-4 border rounded-md mx-auto mb-4">
-      <div className="pb-3">
-        <p>{question.question}</p>
-      </div>
-      <Input
-        type="text"
-        placeholder="answer here, click submit when done"
-        value={
-          isAnswered
-            ? (question as AnsweredLatexQuestion).selectedAnswer
-            : inputValue
-        }
-        onChange={(e) => setInputValue(e.target.value.toLowerCase())}
-        className={`mb-2 ${
-          isAnswered
-            ? isCorrect
-              ? "border-green-500 bg-green-500 dark:bg-opacity-30 bg-opacity-15"
-              : "border-red-500 bg-red-500 dark:bg-opacity-30 bg-opacity-15"
-            : ""
-        }`}
-        readOnly={isAnswered}
-      />
-      {!isAnswered && (
-        <Button
-          className="transition-all duration-200 ease-in-out"
-          onClick={() => onAnswer && onAnswer(inputValue)}
-        >
-          Submit
-        </Button>
-      )}
-    </div>
+    <Form {...useForm({ defaultValues: { answer: "" } })}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="relative p-4 border rounded-md mx-auto mb-4"
+      >
+        <div className="pb-3">
+          <p>{question.question}</p>
+        </div>
+        <FormField
+          control={control}
+          name="answer"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Answer</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="your answer here"
+                  {...field}
+                  value={
+                    isAnswered
+                      ? (question as AnsweredLatexQuestion).selectedAnswer
+                      : field.value
+                  }
+                  className={`mb-2 ${
+                    isAnswered
+                      ? isCorrect
+                        ? "border-green-500 bg-green-500 dark:bg-opacity-30 bg-opacity-15"
+                        : "border-red-500 bg-red-500 dark:bg-opacity-30 bg-opacity-15"
+                      : ""
+                  }`}
+                  readOnly={isAnswered}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        {!isAnswered && (
+          <Button
+            type="submit"
+            className="mt-5 transition-all duration-200 ease-in-out"
+          >
+            Submit
+          </Button>
+        )}
+      </form>
+    </Form>
   );
 };
 
@@ -196,7 +234,7 @@ const QuestionRandomizer: React.FC = () => {
         : setWrongChoices((prev) => prev + 1);
 
       const newRemainingQuestions = remainingQuestions.filter(
-        (q) => q.id !== currentQuestion.id,
+        (q) => q.id !== currentQuestion.id
       );
 
       if (newRemainingQuestions.length > 0) {
@@ -213,7 +251,7 @@ const QuestionRandomizer: React.FC = () => {
       setCorrectChoices,
       setWrongChoices,
       setRandomQuestion,
-    ],
+    ]
   );
 
   return (
@@ -223,7 +261,7 @@ const QuestionRandomizer: React.FC = () => {
           <ChoiceQuestionCard key={q.id} question={q} isAnswered={true} />
         ) : (
           <LatexQuestionCard key={q.id} question={q} isAnswered={true} />
-        ),
+        )
       )}
       {currentQuestion && !allQuestionsReached && (
         <motion.div
