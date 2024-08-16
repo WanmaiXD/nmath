@@ -207,7 +207,28 @@ const QuestionRandomizer: React.FC = () => {
     }
   };
 
+  const calculateResults = () => {
+    let correctChoices = 0;
+    let wrongChoices = 0;
+
+    answeredQuestions.forEach((question) => {
+      const isCorrect = isChoiceQuestion(question)
+        ? question.selectedAnswer === question.correctAnswer
+        : question.correctAnswer.includes(question.selectedAnswer);
+
+      if (isCorrect) {
+        correctChoices++;
+      } else {
+        wrongChoices++;
+      }
+    });
+
+    return { correctChoices, wrongChoices };
+  };
+
   if (allQuestionsReached) {
+    const { correctChoices, wrongChoices } = calculateResults();
+
     return (
       <div ref={questionsContainerRef} className="pb-5">
         {answeredQuestions.map((q) =>
@@ -217,7 +238,13 @@ const QuestionRandomizer: React.FC = () => {
             <LatexQuestionCard key={q.id} question={q} isAnswered={true} />
           )
         )}
-        <div className="text-center text-2xl">every questions has been answered</div>
+        <div className="text-center text-2xl">
+          every question has been answered
+        </div>
+        <div className="text-center mt-4">
+          <p>total correct choices: {correctChoices}</p>
+          <p>total wrong choices: {wrongChoices}</p>
+        </div>
       </div>
     );
   }
@@ -258,7 +285,9 @@ const QuestionRandomizer: React.FC = () => {
         </motion.div>
       )}
       {allQuestionsReached && (
-        <div className="text-center text-2xl mb-2">every questions has been answered</div>
+        <div className="text-center text-2xl mb-2">
+          every question has been answered
+        </div>
       )}
     </div>
   );
