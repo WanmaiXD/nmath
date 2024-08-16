@@ -14,7 +14,22 @@
     {
       "id": 3,
       "question": "im 20 and my girlfriend is 13, what is the age difference",
-      "correctAnswer": ["4"]
+      "correctAnswer": ["7", "drake"]
+    },
+    {
+      "id": 4,
+      "question": "what's 9 + 10",
+      "correctAnswer": ["21"]
+    },
+    {
+      "id": 5,
+      "question": "what's 77 + 33",
+      "correctAnswer": ["100"]
+    },
+    {
+      "id": 6,
+      "question": "what is the best website for math assignment",
+      "correctAnswer": ["deltamath.com", "deltamath", "delta math", "https://deltamath.com"]
     }
   ]
 }

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useScore } from "@/components/quiz/scoreContext";
 
 interface ChoiceQuestion {
   type: "choice";
@@ -134,6 +135,8 @@ const QuestionRandomizer: React.FC = () => {
   const [remainingQuestions, setRemainingQuestions] = useState<Question[]>([]);
   const [allQuestionsReached, setAllQuestionsReached] = useState(false);
 
+  const { setCorrectChoices, setWrongChoices } = useScore(); // context usage here
+
   const questionsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -179,18 +182,31 @@ const QuestionRandomizer: React.FC = () => {
 
   const handleAnswer = (answer: string) => {
     if (currentQuestion) {
+      let isCorrect = false;
+
       if (isChoiceQuestion(currentQuestion)) {
         const answeredQuestion: AnsweredChoiceQuestion = {
           ...currentQuestion,
           selectedAnswer: answer,
         };
         setAnsweredQuestions([...answeredQuestions, answeredQuestion]);
+        isCorrect =
+          answeredQuestion.selectedAnswer === answeredQuestion.correctAnswer;
       } else {
         const answeredQuestion: AnsweredLatexQuestion = {
           ...currentQuestion,
           selectedAnswer: answer,
         };
         setAnsweredQuestions([...answeredQuestions, answeredQuestion]);
+        isCorrect = answeredQuestion.correctAnswer.includes(
+          answeredQuestion.selectedAnswer
+        );
+      }
+
+      if (isCorrect) {
+        setCorrectChoices((prev: number) => prev + 1);
+      } else {
+        setWrongChoices((prev: number) => prev + 1);
       }
 
       const newRemainingQuestions = remainingQuestions.filter(
@@ -207,6 +223,25 @@ const QuestionRandomizer: React.FC = () => {
     }
   };
 
+  const calculateResults = () => {
+    let correctChoices = 0;
+    let wrongChoices = 0;
+
+    answeredQuestions.forEach((question) => {
+      const isCorrect = isChoiceQuestion(question)
+        ? question.selectedAnswer === question.correctAnswer
+        : question.correctAnswer.includes(question.selectedAnswer);
+
+      if (isCorrect) {
+        correctChoices++;
+      } else {
+        wrongChoices++;
+      }
+    });
+
+    return { correctChoices, wrongChoices };
+  };
+
   if (allQuestionsReached) {
     return (
       <div ref={questionsContainerRef} className="pb-5">
@@ -217,7 +252,9 @@ const QuestionRandomizer: React.FC = () => {
             <LatexQuestionCard key={q.id} question={q} isAnswered={true} />
           )
         )}
-        <div className="text-center text-2xl">every questions has been answered</div>
+        <div className="text-center text-2xl">
+          every question has been answered
+        </div>
       </div>
     );
   }
@@ -258,7 +295,9 @@ const QuestionRandomizer: React.FC = () => {
         </motion.div>
       )}
       {allQuestionsReached && (
-        <div className="text-center text-2xl mb-2">every questions has been answered</div>
+        <div className="text-center text-2xl mb-2">
+          every question has been answered
+        </div>
       )}
     </div>
   );
