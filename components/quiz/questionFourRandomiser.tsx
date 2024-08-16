@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useScore } from "@/components/quiz/scoreContext";
 
 interface ChoiceQuestion {
   type: "choice";
@@ -134,6 +135,8 @@ const QuestionRandomizer: React.FC = () => {
   const [remainingQuestions, setRemainingQuestions] = useState<Question[]>([]);
   const [allQuestionsReached, setAllQuestionsReached] = useState(false);
 
+  const { setCorrectChoices, setWrongChoices } = useScore(); // context usage here
+
   const questionsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -179,18 +182,31 @@ const QuestionRandomizer: React.FC = () => {
 
   const handleAnswer = (answer: string) => {
     if (currentQuestion) {
+      let isCorrect = false;
+
       if (isChoiceQuestion(currentQuestion)) {
         const answeredQuestion: AnsweredChoiceQuestion = {
           ...currentQuestion,
           selectedAnswer: answer,
         };
         setAnsweredQuestions([...answeredQuestions, answeredQuestion]);
+        isCorrect =
+          answeredQuestion.selectedAnswer === answeredQuestion.correctAnswer;
       } else {
         const answeredQuestion: AnsweredLatexQuestion = {
           ...currentQuestion,
           selectedAnswer: answer,
         };
         setAnsweredQuestions([...answeredQuestions, answeredQuestion]);
+        isCorrect = answeredQuestion.correctAnswer.includes(
+          answeredQuestion.selectedAnswer
+        );
+      }
+
+      if (isCorrect) {
+        setCorrectChoices((prev: number) => prev + 1);
+      } else {
+        setWrongChoices((prev: number) => prev + 1);
       }
 
       const newRemainingQuestions = remainingQuestions.filter(
@@ -227,8 +243,6 @@ const QuestionRandomizer: React.FC = () => {
   };
 
   if (allQuestionsReached) {
-    const { correctChoices, wrongChoices } = calculateResults();
-
     return (
       <div ref={questionsContainerRef} className="pb-5">
         {answeredQuestions.map((q) =>
@@ -240,10 +254,6 @@ const QuestionRandomizer: React.FC = () => {
         )}
         <div className="text-center text-2xl">
           every question has been answered
-        </div>
-        <div className="text-center mt-4">
-          <p>total correct choices: {correctChoices}</p>
-          <p>total wrong choices: {wrongChoices}</p>
         </div>
       </div>
     );
