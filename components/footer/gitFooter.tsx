@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="mt-10 flex text-xs text-center dark:text-gray-400 text-gray-500 font-mono">
-      <div className="grow text-left">
+      <div className="hidden sm:block grow text-left pr-5">
         commit{" "}
         {latestCommit ? (
           <Link target="_blank" rel="noopener noreferrer" href={latestCommit.html_url} className="transition-colors duration-200 ease-in-out hover:text-orange-600">
@@ -51,6 +51,9 @@ const Footer: React.FC = () => {
         ) : (
           "is loading"
         )}
+      </div>
+      <div className="block sm:hidden grow text-left pr-5">
+        @git420, @wanmaixd
       </div>
       <div>&copy; {currentYear}</div>
     </footer>
