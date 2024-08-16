@@ -25,7 +25,7 @@ export default function CounterCard() {
     color: string;
     shouldAnimate: boolean;
   }) => (
-    <div className={`ml-2 font-bold text-${color}-600`}>
+    <div className={`ml-2 text-${color}-600`}>
       <AnimatePresence mode="wait">
         {shouldAnimate ? (
           <motion.div
