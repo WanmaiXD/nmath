@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useScore } from "@/components/quiz/scoreContext";
-import { z } from "zod";
 import { useForm } from "react-hook-form";
 import {
   Form,
