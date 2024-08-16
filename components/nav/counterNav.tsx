@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { ModeToggle } from "../theming/themeToggle";
 import Link from "next/link";
+import CounterCard from "../quiz/counterCard";
 
 const CounterNav = () => {
   return (
@@ -10,7 +11,7 @@ const CounterNav = () => {
         <Link href={'/'} className="text-black dark:text-white text-2xl">nmath.com</Link>
 
         <div>
-            
+            <CounterCard />
         </div>
 
         <div className={`flex items-center space-x-4`}>
