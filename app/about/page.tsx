@@ -19,7 +19,7 @@ export default function Page() {
 
   let daysUntilTarget = daysDifference;
   return (
-    <main className="py-5">
+    <main className="py-5 min-w-[400px]">
       <div className="max-w-4xl mx-auto px-5">
         <div className="mb-10">
           <MainNav />
