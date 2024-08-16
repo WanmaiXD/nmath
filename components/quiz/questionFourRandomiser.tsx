@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useScore } from "@/components/quiz/scoreContext";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Control, FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
@@ -16,11 +15,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
-// Schema for validation
-const latexAnswerSchema = z.object({
-  answer: z.string().min(1, "Answer cannot be empty"),
-});
 
 interface ChoiceQuestion {
   type: "choice";
@@ -97,7 +91,6 @@ const LatexQuestionCard: React.FC<{
   isAnswered: boolean;
 }> = ({ question, onAnswer, isAnswered }) => {
   const { control, handleSubmit, setValue } = useForm({
-    resolver: zodResolver(latexAnswerSchema),
     defaultValues: {
       answer: "",
     },
@@ -120,7 +113,7 @@ const LatexQuestionCard: React.FC<{
     );
 
   return (
-    <Form {...useForm({ resolver: zodResolver(latexAnswerSchema), defaultValues: { answer: "" } })}>
+    <Form {...useForm({ defaultValues: { answer: "" } })}>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="relative p-4 border rounded-md mx-auto mb-4"
@@ -136,7 +129,7 @@ const LatexQuestionCard: React.FC<{
               <FormLabel>Answer</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="answer here, click submit when done"
+                  placeholder="your answer here"
                   {...field}
                   value={
                     isAnswered
@@ -160,7 +153,7 @@ const LatexQuestionCard: React.FC<{
         {!isAnswered && (
           <Button
             type="submit"
-            className="transition-all duration-200 ease-in-out"
+            className="mt-5 transition-all duration-200 ease-in-out"
           >
             Submit
           </Button>
