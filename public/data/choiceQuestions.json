@@ -14,14 +14,14 @@
     },
     {
       "id": 2,
-      "question": "q1",
+      "question": "if a penguin wears a monocle and dances the cha-cha with a walrus while eating 7.5 pounds of sushi, how many jellybeans would it take to balance a see-saw if the walrus weighs 1,200 pounds and the penguin is 10 times lighter? assume the see-saw is perfectly balanced at 6 feet from the pivot on each side, and each jellybean has a mass of 1 gram. (round your answers)",
       "choices": {
-        "choice1": "q2c1",
-        "choice2": "q2c2",
-        "choice3": "q2c3",
-        "choice4": "q2c4"
+        "choice1": "598,749 jellybeans",
+        "choice2": "598,748 jellybeans",
+        "choice3": "598,747 jellybeans",
+        "choice4": "598,746 jellybeans"
       },
-      "correctAnswer": "choice2"
+      "correctAnswer": "choice1"
     },
     {
       "id": 3,
