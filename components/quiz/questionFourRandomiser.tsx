@@ -181,12 +181,17 @@ const QuestionRandomizer: React.FC = () => {
         fetch("/data/latexFill.json").then((response) => response.json()),
       ]);
 
+      const shuffledChoiceData = choiceData.questions.map((q: ChoiceQuestion, index: number) => ({
+        ...q,
+        id: index + 1,
+        type: "choice",
+        choices: Object.fromEntries(
+          Object.entries(q.choices).sort(() => Math.random() - 0.5)
+        ),
+      }));
+
       const allQuestions = [
-        ...choiceData.questions.map((q: ChoiceQuestion, index: number) => ({
-          ...q,
-          id: index + 1,
-          type: "choice",
-        })),
+        ...shuffledChoiceData,
         ...latexData.questions.map((q: LatexQuestion, index: number) => ({
           ...q,
           id: choiceData.questions.length + index + 1,
