@@ -5,16 +5,16 @@
       "id": 1,
       "question": "Tyrone stole 46 pieces of chicken from KFC, how much in watermelon does Tyrone have to pay back if 1 watermelon is 2 pieces of chicken?",
       "choices": {
-        "choice1": "23 Watermelons",
+        "choice1": "24 Watermelons",
         "choice2": "31 Watermelons",
-        "choice3": "24 Watermetons",
+        "choice3": "23 Watermelons",
         "choice4": "19 Watermelons"
       },
-      "correctAnswer": "choice1"
+      "correctAnswer": "choice3"
     },
     {
       "id": 2,
-      "question": "if a penguin wears a monocle and dances the cha-cha with a walrus while eating 7.5 pounds of sushi, how many jellybeans would it take to balance a see-saw if the walrus weighs 1,200 pounds and the penguin is 10 times lighter? assume the see-saw is perfectly balanced at 6 feet from the pivot on each side, and each jellybean has a mass of 1 gram. (round your answers)",
+      "question": "If a penguin wears a monocle and dances the cha-cha with a walrus while eating 7.5 pounds of sushi, how many jellybeans would it take to balance a see-saw if the walrus weighs 1,200 pounds and the penguin is 10 times lighter? Assume the see-saw is perfectly balanced at 6 feet from the pivot on each side, and each jellybean has a mass of 1 gram. (round your answers)",
       "choices": {
         "choice1": "598,749 jellybeans",
         "choice2": "598,748 jellybeans",
@@ -25,25 +25,36 @@
     },
     {
       "id": 3,
-      "question": "q3",
+      "question": "If a unicorn has 7.5 magical sparkles and each sparkle weighs 2.3 grams, how many grams of glitter will the unicorn need to cover 9.6 inches of rainbow if each inch of rainbow absorbs 0.8 grams of glitter per sparkle?",
       "choices": {
-        "choice1": "q3c1",
-        "choice2": "q3c2",
-        "choice3": "q3c3",
-        "choice4": "q3c4"
+        "choice1": "53.6 grams of invisible unicorn tears",
+        "choice2": "17.4 pounds of moon cheese",
+        "choice3": "34.5 grams of glitter",
+        "choice4": "42 magical jellybeans"
       },
       "correctAnswer": "choice3"
     },
     {
       "id": 4,
-      "question": "q4",
+      "question": "If a platypus decides to play hopscotch on a 12-dimensional hypercube and each hop has a probability of 0.6 to land on a space filled with rainbow-colored marshmallows, how many marshmallows will it land on after 8 hops, assuming each hop is independent and the marshmallows are 3.14% magical?",
       "choices": {
-        "choice1": "q4c1",
-        "choice2": "q4c2",
-        "choice3": "q4c3",
-        "choice4": "q4c4"
+        "choice1": "The number of jellybeans in a teapot",
+        "choice2": "7.8 marshmallows and a floating teaspoon",
+        "choice3": "4.3 marshmallows plus an imaginary number of unicorns",
+        "choice4": "1.7 marshmallows with a side of math-themed cotton candy"
       },
-      "correctAnswer": "choice4"
+      "correctAnswer": "choice2"
+    },
+    {
+      "id": 5,
+      "question": "In a parallel universe where math is based on jellybeans, if a logarithm of a jellybean equals the square root of 27 divided by the number of gnomes juggling flamingos, what is the average number of flamingos required to balance the equation, given that the gnomes use 5.8 kilograms of invisible frosting per flamingo?",
+      "choices": {
+        "choice1": "9 gnomes and a partridge in a pear tree",
+        "choice2": "3.14159 jellybeans per flamingo",
+        "choice3": "42 flamingos with a side of calculus",
+        "choice4": "1.2 gnomes juggling 1.5 flamingos each"
+      },
+      "correctAnswer": "choice1"
     }
   ]
 }
