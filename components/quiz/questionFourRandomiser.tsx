@@ -114,6 +114,7 @@ const LatexQuestionCard: React.FC<{
   return (
     <Form {...useForm({ defaultValues: { answer: "" } })}>
       <form
+        autoComplete="off"
         onSubmit={handleSubmit(onSubmit)}
         className="relative p-4 border rounded-md mx-auto mb-4"
       >
