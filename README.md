@@ -1,5 +1,5 @@
 ### nmath
-##### beast math questions
+##### never-ending math abominations that hurt
 ---
 
 #### **[running locally]**
