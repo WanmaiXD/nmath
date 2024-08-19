@@ -14,39 +14,6 @@
     },
     {
       "id": 2,
-      "question": "If a penguin wears a monocle and dances the cha-cha with a walrus while eating 7.5 pounds of sushi, how many jellybeans would it take to balance a see-saw if the walrus weighs 1,200 pounds and the penguin is 10 times lighter? Assume the see-saw is perfectly balanced at 6 feet from the pivot on each side, and each jellybean has a mass of 1 gram. (round your answers)",
-      "choices": {
-        "choice1": "598,749 jellybeans",
-        "choice2": "598,748 jellybeans",
-        "choice3": "598,747 jellybeans",
-        "choice4": "598,746 jellybeans"
-      },
-      "correctAnswer": "choice1"
-    },
-    {
-      "id": 3,
-      "question": "If a unicorn has 7.5 magical sparkles and each sparkle weighs 2.3 grams, how many grams of glitter will the unicorn need to cover 9.6 inches of rainbow if each inch of rainbow absorbs 0.8 grams of glitter per sparkle?",
-      "choices": {
-        "choice1": "53.6 grams of invisible unicorn tears",
-        "choice2": "17.4 pounds of moon cheese",
-        "choice3": "34.5 grams of glitter",
-        "choice4": "42 magical jellybeans"
-      },
-      "correctAnswer": "choice3"
-    },
-    {
-      "id": 4,
-      "question": "If a platypus decides to play hopscotch on a 12-dimensional hypercube and each hop has a probability of 0.6 to land on a space filled with rainbow-colored marshmallows, how many marshmallows will it land on after 8 hops, assuming each hop is independent and the marshmallows are 3.14% magical?",
-      "choices": {
-        "choice1": "The number of jellybeans in a teapot",
-        "choice2": "7.8 marshmallows and a floating teaspoon",
-        "choice3": "4.3 marshmallows plus an imaginary number of unicorns",
-        "choice4": "1.7 marshmallows with a side of math-themed cotton candy"
-      },
-      "correctAnswer": "choice2"
-    },
-    {
-      "id": 5,
       "question": "In a parallel universe where math is based on jellybeans, if a logarithm of a jellybean equals the square root of 27 divided by the number of gnomes juggling flamingos, what is the average number of flamingos required to balance the equation, given that the gnomes use 5.8 kilograms of invisible frosting per flamingo?",
       "choices": {
         "choice1": "9 gnomes and a partridge in a pear tree",
@@ -55,6 +22,50 @@
         "choice4": "1.2 gnomes juggling 1.5 flamingos each"
       },
       "correctAnswer": "choice1"
+    },
+    {
+      "id": 3,
+      "question": "What is the minimum number of transfers needed to travel from Ikebukuro Station to Ueno Station?",
+      "choices": {
+        "choice1": "0 transfers",
+        "choice2": "1 transfers",
+        "choice3": "2 transfers",
+        "choice4": "3 transfers"
+      },
+      "correctAnswer": "choice1"
+    },
+    {
+      "id": 4,
+      "question": "What is the correct order to get from Arakawakuyakushomae station to Shiotsu station?",
+      "choices": {
+        "choice1": "Arakawakuyakushomae - Minowabashi - Minowa - Naka-okachimachi - Ueno-okachimachi - Shinjuku-nishiguchi - Shinjuku - Hachioji - Takao - Shiotsu",
+        "choice2": "Arakawakuyakushomae - Minowa - Naka-okachimachi - Ueno-okachimachi - Shinjuku-nishiguchi - Shiotsu",
+        "choice3": "Arakawakuyakushomae - Minowa - Naka-okachimachi - Ueno-okachimachi - Shinjuku-nishiguchi - Hachioji - Shiotsu",
+        "choice4": "Arakawakuyakushomae - Minowabashi - Minowa - Naka-okachimachi - Ueno - Shinjuku-nishiguchi - Shinjuku - Hachioji - Takao - Shiotsu"
+      },
+      "correctAnswer": "choice1"
+    },
+    {
+      "id": 5,
+      "question": "What ATC position primarily controls the movement of aircraft on runways and in the immediate vicinity of the airport",
+      "choices": {
+        "choice1": "Tower",
+        "choice2": "Approch",
+        "choice3": "Ground",
+        "choice4": "Clearance Delivery"
+      },
+      "correctAnswer": "choice1"
+    },
+    {
+      "id": 6,
+      "question": "When squawking Mode C, your transponder transmits what information?",
+      "choices": {
+        "choice1": "Indicated Airspeed",
+        "choice2": "Altitude",
+        "choice3": "Aircraft type",
+        "choice4": "Heading"
+      },
+      "correctAnswer": "choice2"
     }
   ]
 }
