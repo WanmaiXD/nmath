@@ -70,8 +70,8 @@ const ChoiceQuestionCard: React.FC<{
                     ? "bg-green-500 dark:bg-opacity-30 bg-opacity-15 border-green-500 dark:text-white text-black"
                     : "bg-red-500 bg-opacity-30 border-red-500 dark:text-white text-black"
                   : key === question.correctAnswer
-                    ? "bg-green-500 dark:bg-opacity-30 bg-opacity-15 border-green-500 dark:text-white text-black"
-                    : "bg-neutral-100 dark:bg-neutral-800"
+                    ? ""
+                    : ""
                 : "bg-neutral-100 dark:bg-neutral-800"
             }`}
             onClick={() => !isAnswered && onAnswer && onAnswer(key)}
