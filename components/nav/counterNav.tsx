@@ -7,8 +7,8 @@ import NavDropdown from "./navDropdown";
 
 const CounterNav = () => {
   return (
-    <nav className="rounded-md animate-all ease-in-out duration-300">
-      <div className="mx-auto flex justify-between items-center">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-neutral-900 border-b border-gray-300 dark:border-neutral-700 py-2 px-4">
+      <div className="mx-auto flex justify-between items-center max-w-7xl">
         <Link href={"/"} className="text-black dark:text-white text-2xl">
           nmath.com
         </Link>
