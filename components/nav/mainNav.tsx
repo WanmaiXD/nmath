@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { ModeToggle } from "../theming/themeToggle";
 import Link from "next/link";
+import NavDropdown from "./navDropdown";
 
 const MainNav = () => {
   return (
@@ -9,7 +10,7 @@ const MainNav = () => {
       <div className="mx-auto flex justify-between items-center">
         <Link href={'/'} className="text-black dark:text-white text-2xl">nmath.com</Link>
 
-        <div className={`flex items-center space-x-4`}>
+        <div className={`hidden sm:flex items-center space-x-4`}>
           <Link
             href="/about"
             className="transition-colors duration-200 ease-in-out hover:text-orange-600"
@@ -28,6 +29,7 @@ const MainNav = () => {
             <ModeToggle />
           </div>
         </div>
+        <NavDropdown />
       </div>
     </nav>
   );

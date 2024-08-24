@@ -70,11 +70,11 @@ export default function NavDropdown() {
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <Link href={"https://github.com/WanmaiXD/nmath"} target="_blank">
-              <DropdownMenuItem>
-                <Code className="mr-2 h-4 w-4" />
-                <span>source code</span>
-              </DropdownMenuItem>
+          <Link href={"https://github.com/WanmaiXD/nmath"} target="_blank">
+            <DropdownMenuItem>
+              <Code className="mr-2 h-4 w-4" />
+              <span>source code</span>
+            </DropdownMenuItem>
             </Link>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />

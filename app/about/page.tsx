@@ -26,11 +26,11 @@ export default function Page() {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/">home</BreadcrumbLink>
+                <BreadcrumbLink href="/" className="transition-colors duration-200 ease-in-out hover:text-orange-600">home</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href="/about">about</BreadcrumbLink>
+                <BreadcrumbLink href="/about" className="transition-colors duration-200 ease-in-out hover:text-orange-600">about</BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
