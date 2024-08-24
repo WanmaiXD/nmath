@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { ModeToggle } from "../theming/themeToggle";
 import Link from "next/link";
 import CounterCard from "./counterCard";
+import NavDropdown from "./navDropdown";
 
 const CounterNav = () => {
   return (
@@ -16,7 +17,7 @@ const CounterNav = () => {
           <CounterCard />
         </div>
 
-        <div className={`flex items-center space-x-4`}>
+        <div className={`hidden sm:flex items-center space-x-4`}>
           <Link
             href="/about"
             className="transition-colors duration-200 ease-in-out hover:text-orange-600"
@@ -35,6 +36,7 @@ const CounterNav = () => {
             <ModeToggle />
           </div>
         </div>
+        <NavDropdown />
       </div>
     </nav>
   );
