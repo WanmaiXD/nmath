@@ -4,7 +4,7 @@ import { ScoreProvider } from "@/components/quiz/scoreContext";
 
 export default function Home() {
   return (
-    <main className="pt-5">
+    <main className="pt-10">
       <div className="max-w-4xl mx-auto px-5">
         <div>
           <ScoreProvider>
