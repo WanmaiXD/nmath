@@ -3,33 +3,38 @@
   "questions": [
     {
       "id": 1,
-      "question": "what is the square root of 81",
+      "question": "What is the square root of 81?",
       "correctAnswer": ["+-9", "-+9", "9, -9", "-9, 9", "9,-9", "-9,9"]
     },
     {
       "id": 2,
-      "question": "[test] answer is 2",
+      "question": "[test] the answer is 2",
       "correctAnswer": ["3"]
     },
     {
       "id": 3,
-      "question": "im 20 and my girlfriend is 13, what is the age difference",
+      "question": "I'm 20 and my girlfriend is 13, what is the age difference?",
       "correctAnswer": ["7", "drake"]
     },
     {
       "id": 4,
-      "question": "what's 9 + 10",
+      "question": "What's 9 + 10?",
       "correctAnswer": ["21"]
     },
     {
       "id": 5,
-      "question": "what's 77 + 33",
+      "question": "What's 77 + 33?",
       "correctAnswer": ["100"]
     },
     {
       "id": 6,
-      "question": "what is the best website for math assignment",
+      "question": "What is the best website for math assignment?",
       "correctAnswer": ["deltamath.com", "deltamath", "delta math", "https://deltamath.com"]
+    },
+    {
+      "id": 7,
+      "question": "What is the first word in your mind?",
+      "correctAnswer": ["dick", "pussy", "cum", "nigga", "nigger", "fuck", "bitch", "slave", "slaves", "shit", "motherfucker"],
     }
   ]
 }
